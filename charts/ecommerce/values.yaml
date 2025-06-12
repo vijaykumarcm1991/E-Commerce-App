@@ -1,0 +1,11 @@
+frontend:
+  image:
+    repository: vijaykumarcm/ecom-frontend
+    tag: latest
+  port: 80
+
+backend:
+  image:
+    repository: vijaykumarcm/ecom-backend
+    tag: latest
+  port: 3000
