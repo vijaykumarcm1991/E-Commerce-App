@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds') // replace with your Jenkins DockerHub credential ID
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds') // Replace with your actual credentials ID if different
         BACKEND_IMAGE = "vijaykumarcm/ecom-backend"
         FRONTEND_IMAGE = "vijaykumarcm/ecom-frontend"
     }
@@ -42,7 +42,7 @@ pipeline {
 
         stage('Push Backend Image to DockerHub') {
             steps {
-                withDockerRegistry(credentialsId: 'dockerhub-creds') {
+                withDockerRegistry([credentialsId: 'dockerhub-creds', url: 'https://index.docker.io/v1/']) {
                     sh "docker push $BACKEND_IMAGE:${BUILD_NUMBER}"
                 }
             }
@@ -50,7 +50,7 @@ pipeline {
 
         stage('Push Frontend Image to DockerHub') {
             steps {
-                withDockerRegistry(credentialsId: 'dockerhub-creds') {
+                withDockerRegistry([credentialsId: 'dockerhub-creds', url: 'https://index.docker.io/v1/']) {
                     sh "docker push $FRONTEND_IMAGE:${BUILD_NUMBER}"
                 }
             }
